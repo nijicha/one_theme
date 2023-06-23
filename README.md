@@ -31,8 +31,8 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 
 ## Development suite
 
-- [ ] Add team config for `.vscode`
-- [ ] Dockerization
+- [x] Dockerization
+  - [ ] Fix environment bugs
 - [ ] GitHub Actions
 
 ## Add awesome tools
@@ -53,6 +53,6 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 - [ ] [Husky](https://typicode.github.io/husky/#/)
 
 ## Add awesome lib
-
-- [ ] tailwind config viwer
+- [x] [tailwind-config-viewer](https://github.com/rogden/tailwind-config-viewer)
+- [ ] [FontSource](https://fontsource.org/)
 - [ ] Storybook <-> Figma dev sync
