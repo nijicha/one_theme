@@ -17,6 +17,8 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
+RUN npx prisma generate
+
 ##### BUILDER
 
 FROM node:16-alpine AS builder
