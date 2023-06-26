@@ -1,14 +1,46 @@
 version: "3.9"
 services:
   web:
+    container_name: "one_theme_web"
+    stdin_open: true
+    tty: true
+    env_file: ./.env
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_CLIENTVAR: "clientvar"
+        NEXT_PUBLIC_CLIENTVAR: ${NEXT_PUBLIC_CLIENTVAR}
     working_dir: /app
     ports:
       - "3000:3000"
     image: one_theme_web
+    networks:
+      - one_theme_network
+    depends_on:
+      - db
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@localhost:5432
+      - DATABASE_URL=${DATABASE_URL}
+      - NODE_ENV=${NODE_ENV}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
+      - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
+
+  db:
+    container_name: "one_theme_postgres"
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=one_theme_development
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - one_theme_network
+    ports:
+      - "5432:5432"
+networks:
+  one_theme_network:
+volumes:
+  db:
